@@ -3,7 +3,7 @@
         CELL_HEIGHT = 25, // высота ячейки
         num_rows = 50, // y
         num_cols = 40, // x
-        range = 10, // область вокруг границы в пикселях, щелчок по которой инициирует передвижение границы 
+        range = 10, // область вокруг границы в пикселях, щелчок по которой инициирует передвижение границы
         values = {}, // значения
         cols = {},
         rows = {},
@@ -42,11 +42,11 @@
 
     'use strict';
 
-    //			
-    //			
+    //
+    //
     //			Контроллеры
-    //			
-    //			
+    //
+    //
 
 
     // обработка щелчка по таблице
@@ -107,7 +107,7 @@
                 dragObject.downX = e.pageX;
                 dragObject.downY = e.pageY;
             }
-            if (!rows[target.id]) rows[target.id] = CELL_HEIGHT;
+            if (!rows[dragObject.elem.id]) rows[dragObject.elem.id] = CELL_HEIGHT;
         } else {
             if (target.clientWidth - e.offsetX < range || e.offsetX < range) {
                 if (e.offsetX < range) dragObject.elem = target.previousElementSibling;
@@ -115,7 +115,7 @@
                 dragObject.downX = e.pageX;
                 dragObject.downY = e.pageY;
             }
-            if (!cols[target.id]) cols[target.id] = CELL_WIDTH;
+            if (!cols[dragObject.elem.id]) cols[dragObject.elem.id] = CELL_WIDTH;
         }
     });
 
@@ -156,20 +156,20 @@
     });
 
     // обработка скролла
-    // если пересекли значение в ширину/высоту ячейки, 
+    // если пересекли значение в ширину/высоту ячейки,
     // то рисуем еще 3
     window.addEventListener("scroll", function() {
         if (document.documentElement.scrollHeight - window.pageYOffset < document.body.clientHeight + CELL_HEIGHT) addNewTr(3);
         if (document.documentElement.scrollWidth - window.pageXOffset < document.body.clientWidth + CELL_WIDTH) addNewTd(3);
     });
 
-    //			
-    //			
+    //
+    //
     //			Вспомогательные функции
-    //			
-    //			
-	
-	// Возвращает координаты элемента
+    //
+    //
+
+    // Возвращает координаты элемента
     function getCoords(elem) { // кроме IE8-
         var box = elem.getBoundingClientRect();
         return {
@@ -195,7 +195,7 @@
     // num = 148 - 1*100;
     // letter+=Math.floor(num/10);
     // num = 48 - 4*10;
-    // letter+=num; 
+    // letter+=num;
     // letter==148; //true
     function getLetter(num) {
         var letter = '';
@@ -225,11 +225,11 @@
         }
     }
 
-    //			
-    //			
+    //
+    //
     //			Функции работы с таблицами
-    //			
-    //			
+    //
+    //
 
     // создает таблицу с указанным значением
     function createTableSize(x, y) {
